@@ -1,0 +1,56 @@
+---
+title: "Final Project: EDA Executive Summary"
+subtitle: "Data Science I (STAT 301-1)"
+author: "Sammy Mustafa"
+date: "11/10/2021"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+    code_folding: "show"
+---
+
+```{r, echo = FALSE}
+# Load Packages
+library(knitr)
+```
+
+# Introduction
+The purpose of this entire report of data extraction and EDA was to study the diversity of the states in terms of age, income, race, gender, form of transportation used to get to work, and occupation. A brief overview of the findings include Maine having the highest median age, Utah having the lowest median age, Maryland having the highest median income, Mississippi having the lowest median income, Hawaii being the most racially diverse, NY having the most diverse form of transportation usage to work, and Arkansas having the most uneven gender balance and most diverse occupations from its population. 
+
+However, this EDA presents a lot of conclusions that may be interesting or surprising to some. This becomes more apparent when interpreting these results alongside the general understanding and conclusions one has about each state. Thus, this analysis also serves to adjust or even correct people's views of states they may not be completely familiar with. 
+
+# Body: Interesting Findings
+The findings that stood out to me the most are the racial diversity of Hawaii, where in the US the greatest occupational diversity was observed, and the state with the lowest median age. 
+
+### Great Racial Diversity of Hawaii
+From the data as a whole and from the graph below, it can be seen how the majority race in the US is White. Thus, most states displayed great diversity when they had less of this majority and more minority races. From most states, greater proportions of the Black/African American and Hispanic/Latino minority groups were an indication of diversity. However, the minorities that had greater proportions in Hawaii were the Asian and Two or more races; in fact, there is a greater proportion of Asians than Whites in Hawaii. However, Hawaii as a whole displayed a great and the closest-to even distribution of races in the US states by a long-shot. While Hawaii being separated from the US and being the Pacific may be a reason for this, I never really processed how different the demographics of Hawaii is compared to most other US states.
+<br>
+
+```{r, echo = FALSE}
+include_graphics("images/race_US.png")
+```
+<br><br>
+
+### Greatest Occupational Diversity in Non-Metropolitan States
+I planned on studying the diversity in terms of occupations in the US because I thought this would be a battle of states in main metropolitan areas, like New York or Illinois. I thought this because metropolitan areas usually contain a diverse range of people that would also come with a diverse range of skills and, subsequently, jobs. I was very surprised when seeing Arkansas, Maryland, South Dakota, and Vermont as the states coming out on top in terms of occupational diversity in the graph below. When thinking about it more after seeing this data, this may be due to the different and maybe more varied terrains that allow for/promote other occupations within the state. In addition, their overall geographies in the state and world play a role in the occupations for these states. This data truly made me take a step back and analyze all the factors involved in occupations more.
+<br>
+
+```{r, echo = FALSE}
+include_graphics("images/occupation_US.png")
+```
+<br><br>
+
+### Maine Having the Lowest Median Age
+From the graph below, it is easy to pinpoint which states have higher or lower median ages. It was very surprising to see that Maine had the highest median age of 40. I thought that states that attract more retirees like Florida and Arizona would have the highest median age. Looking at these corresponding bars shows that they still have a relatively higher median age, but does not explain the highest median age from Maine. When thinking about it more deeply, it may be because metropolitan areas in proximity may be more appealing to people looking for job opportunities and places to raise families; this means that Maine may have a shortage of young adults trying to have children there and thus a greater proportion of older individuals. This coupled with its low population, meaning its median age is more vulnerable to change, may be the reason for Maine having the highest median age in the US.
+<br>
+
+```{r, echo = FALSE}
+include_graphics("images/age.png")
+```
+<br><br>
+
+# Conclusion
+In conclusion, this analysis has not only educated me on the diversity of the US in terms of age, income, race, gender, form of transportation used to get to work, and occupation, but has also corrected my views and adjusted my opinions of certain US states. This data has opened my eyes to new interpretations of these states and has allowed me to understand my country better. While the ACS data did provide more variables/concepts to study, recommendations for future EDA's like this would be to utilize decennial data to have more accurate data to work with rather than estimates based on approximately 3 million households. In addition, studying this diversity at the county level in each state would be interesting to delve more into the diversity within a single state.
+

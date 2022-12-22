@@ -1,0 +1,259 @@
+---
+title: "Final Project: EDA Long Format"
+subtitle: "Data Science I (STAT 301-1)"
+author: "Sammy Mustafa"
+date: "11/10/2021"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    highlight: "tango"
+    code_folding: "show"
+---
+
+```{r, echo = FALSE}
+# Load Packages
+library(knitr)
+```
+
+# Introduction
+The U.S. Census Bureau releases information that is extremely important in understanding our differences at the regional, state, and even county level. Apart from the traditional decennial Census data, there are also American Community Survey (ACS) data that provide estimates of concepts related to factors like age, race, income, and much more based on an annual sample of around three million households. However, the number of concepts expressed within these data is overwhelming and can be too much to comprehend. Thankfully, the "tidycensus" function allows for the creation of a census data set incorporating concepts that are of interest to me. 
+
+The most recent 5-year ACS data come from the 2015-2019 Public Use Microdata Samples. While the concepts included in this data are extensive, those that I thought would be interesting to study included the median age and income as well as the proportion of each race, gender, transportation used to get to work, and occupation from each US state. By extracting, collecting, and cleaning data to conduct an exploratory data analysis (EDA) of, a comprehensive comparison of these six variables at the state-level. Mainly, this analysis studies and compares the diversity of age, income, race, gender, transportation used to get to work, and occupation within each state.
+<br><br>
+
+# Body: Data 
+I will analyze the median age and income in terms of all the US states while the proportions of each race, gender, form of transportation used to get to work, and occupation will be studied in terms of the four US regions as defined by the U.S. Census Bureau: Northeast, Midwest, South, and West. This is because the median age and income data are bi-variate data, meaning it is not difficult to interpret the data from the states as whole. However, the proportion data are multivariate data so it would be extremely difficult to make an accurate comparison of these proportions with many variables incorporated with so many states at once. To still get an analysis of these proportion data at the national level, I will identify and compare the states with the most diverse population in terms of race, form of transportation used to get to work, and occupation as well as the most unequal gender balance to see which state in the US as a whole is the most diverse or different. In this case, more diversity is associated with an equal proportion among each division of a variable (ex: the eight races studied all having the same proportion of 0.125). 
+
+Additionally, it is important to recognize which variables within the multivariate data have the greatest variability from state to state; for example, seeing the distribution of the Asian proportion from all the states would be interesting to visualize to identify if the proportions of Asians varies greatly. This visualization of the variables' distribution allows for the identification of variables that may be of interest when looking for differences in diversity. In addition, these distribution graphs serve as an indication of whether a percent stacked column chart or a 2D heatmap is a more effective way of representing the data. Data with more variation would be better visualized as a column chart while those with less variation would be better off as a 2D heatmap; minuscule differences are hard to identity with a stacked column chart while the heatmap does a good job of making these small distinctions evident.
+<br><br>
+
+### Age
+Purpose: Identify the US state with the highest median age and that with the lowest median age.
+<br>
+Description of Data Processing: The median age from each state was extracted from the data set and graphed this into a bar chart. 
+<br><br>
+
+#### Median Age in Each US State
+```{r, echo = FALSE}
+include_graphics("images/age.png")
+```
+From the graph, it can be seen that most states have a median age of around 37. Identifying the tallest and shortest bar identifies the states with the highest and lowest median age, respectively. From the data, it can be seen that Maine (ME) has the highest median age, around 45, while Utah (UT) has the lowest median age, around 30. This is approximately a 15 year difference in the median age.
+<br><br>
+
+
+### Income
+Purpose: identify the US state with the highest median income and that with the lowest median income.
+<br>
+Description of Data Processing: The median income from each state was extracted from the data set and graphed this into a bar chart.
+<br><br>
+
+#### Median Age in Each US State
+```{r, echo = FALSE}
+include_graphics("images/income.png")
+```
+From the graph, it can be seen that most states have a median income around $30,000. Identifying the tallest and shortest bar identifies the states with the highest and lowest median income, respectively. From the data, it can be seen that Maryland (MD) has the highest median income, around $40,000, while Mississippi (MS) has the lowest median income, around $25,000. This is approximately a $15,000 difference in the median income.
+<br><br>
+
+
+### Race
+Purpose: Using the proportion of American Indian/Alaska Native, Asian, Black/African American, Hispanic/Latino, Native Hawaiian/Pacific Islander, Other, Two or More Races, and White individuals in each US region to identify the most racially diverse US state.
+<br>
+Description of Data Processing: The proportions of each race from each state were extracted from the data set and subsequently put through the "pivot_longer" then "pivot_wider" functions to create a column for race and columns for each state. This allowed for the selection of US region/states of interest followed by the repeated use of the "pivot_longer" function to isolate the proportions used for each race in the percent stacked column chart.
+<br><br>
+
+#### US State Distribution/Variability of the Proportion of Each Race
+```{r, echo = FALSE}
+include_graphics("images/race_dis.png")
+```
+Subplots were created for each race studied, allowing for the comparison of the variability of the proportions of each race. From the histogram, it can be seen that proportions of Black/African American, Hispanic/Latino, and White identities varied the most. Additionally, seeing how high the proportions of White individuals are means that greater diversity may come from lower proportions of White people. From this, paying attention to the proportions of these specific races may help when determining the most racially diverse states. In addition, there seems to be a good amount of variation in the proportions of the races, meaning a percent stacked column chart would be the best way to visualize these differences in proportions.
+<br><br>
+
+#### Proportion of Races in the Northeast US
+```{r, echo = FALSE}
+include_graphics("images/race_NE.png")
+```
+From the graph, it can be seen that both New Jersey (NJ) and New York (NY) have a smaller White proportion with greater Asian, Black/African American, and Hispanic/Latino proportions than the rest, meaning more diversity. However, NJ does have a bit of smaller White proportion so NJ is the most racially diverse state in the Northeast US.
+<br><br>
+
+#### Proportion of Races in the Midwest US
+```{r, echo = FALSE}
+include_graphics("images/race_MW.png")
+```
+From the graph, it can be seen that Illinois (IL) has a notably smaller White proportion and greater Black/African American and Hispanic/Latino proportions, meaning more diversity. Thus, IL is the most racially diverse state in the Midwest US.
+<br><br>
+
+#### Proportion of Races in the South US
+```{r, echo = FALSE}
+include_graphics("images/race_S.png")
+```
+From the graph, it can be seen that Texas (TX) has the smallest White proportion and a significantly greater Hispanic/Latino proportion. While other states like Florida (FL) have small White proportions and a greater Black/African American proportion, the significant difference in white proportion makes TX the most racially diverse state in the South US. It is also interesting to note at how high the white proportion is in both Kentucky (KY) and West Virginia (WV).
+<br><br>
+
+#### Proportion of Races in the West US
+```{r, echo = FALSE}
+include_graphics("images/race_W.png")
+```
+From the graph, it could be seen that various states have low White proportions. While states like New Mexico (NM) and California (CA) have high Hispanic/Latino proportions, Hawaii (HI) has a more even set of proportions for each race, making HI the most racially diverse state in the West US. It is interesting to note the high proportions of Asian and Two or more Races within HI.
+<br><br>
+
+#### Proportion of Races in the Most Diverse States of Each US Region
+```{r, echo = FALSE}
+include_graphics("images/race_US.png")
+```
+From the graph, it is evident that HI displays the most even proportions among each race, meaning HI is the most racially diverse US state. It is also interesting to note how diversity arises in all these states from increased Black/African American and Hispanic/Latino proportions except in HI; in fact, HI has a greater Asian proportion than White proportion. 
+<br><br>
+
+
+### Gender
+Purpose: Using the proportion of males and females in each US region to identify the US state with the most uneven gender balance.
+<br>
+Description of Data Processing: The proportions of each gender from each state were extracted from the data set and subsequently put through the "pivot_longer" then "pivot_wider" functions to create a column for gender and columns for each state. This allowed for the selection of the US region/states of interest followed by the repeated use of the "pivot_longer" function to isolate the proportions used for each gender in the 2D heatmap.
+<br><br>
+
+#### US State Distribution/Variability of the Proportion of Each Gender
+```{r, echo = FALSE}
+include_graphics("images/gender_dis.png")
+```
+Subplots were created for each gender studied, allowing for the comparison of the variability of the proportions of each gender. From the histogram, it can be seen that histograms are almost mirror images of each other; while this indicates that there is generally a 51-to-49 ratio of females-to-males, the "outliers" in the data are indicative that some states have ratios that deviate from this average. From this, paying attention to the difference in gender proportions will help identify the state with the most uneven gender balance. In addition, there are minuscule variations in the proportions of the genders, meaning a 2D heatmap would be the best way to visualize these minimal differences in proportions; for each state, starker differences in the hue for each gender is indicative of a more uneven gender balance. 
+<br><br>
+
+#### Proportion of Genders in the Northeast US
+```{r, echo = FALSE, message = FALSE}
+include_graphics("images/gender_NE.png")
+```
+From the graph, the starkest difference in hue may be a bit ambiguous between Rhode Island (RI), NY, and Massachusetts (MA). However, looking at the darkness or lower proportion of the male proportion identifies MA as having the most uneven gender balance in the Northeast US. It is also interesting to note how New Hampshire (NH) has similar hues for both the male and female proportion, meaning they have more of an even gender balance.
+<br><br>
+
+#### Proportion of Genders in the Midwest US
+```{r, echo = FALSE}
+include_graphics("images/gender_MW.png")
+```
+From the graph, North Dakota (ND) can be identified as having the most uneven gender balance in the Midwest US as the hues of their male and female proportions are extremely different: the female box is extremely dark (lower proportion) while the male box is extremely bright (higher proportion). It is also interesting to note how this pattern of a higher male proportion observed in ND is opposite to most of the other states. 
+<br><br>
+
+#### Proportion of Genders in the South US
+```{r, echo = FALSE}
+include_graphics("images/gender_S.png")
+```
+From the graph, the starkest difference in hue may be a bit ambiguous between Maryland (MD) and Alabama (AL). However, looking at the darkness or lower proportion of the male proportion identifies AL as having the most uneven gender balance in the South US. It is interesting to note that various states in the South seem to have similar hues for the male and female boxes, being indicative of an even proportion of males to females.
+<br><br>
+
+#### Proportion of Genders in the West US
+```{r, echo = FALSE}
+include_graphics("images/gender_W.png")
+```
+From the graph, Arkansas (AK) can be easily identified as having the most uneven gender balance in the West US as the hues of their male and female proportions are extremely different: the female box is extremely dark (lower proportion) while the male box is extremely bright (higher proportion). It is also interesting to note how most other states in this region seem to have an even gender balance. 
+<br><br>
+
+#### Proportion of Genders in the Most Uneven Male-Female States of Each US Region
+```{r, echo = FALSE}
+include_graphics("images/gender_US.png")
+```
+From the graph, it can be easily identified that the state with the starkest difference in hue is AK. Considering how dark the female box is (lower proportion) and how light the male box is (higher proportion), AK has the most uneven gender balance in the US. It is also interesting to note how half these states had a pattern of a greater proportion of males while the other half displayed a greater proportion of females. 
+<br><br>
+
+
+### Transportation to Work
+Purpose: Using the proportion of individuals that drive, carpool, walk, work at home, bike, or use public transportation to get to work in each US region to identify the state that uses the most diverse forms of transportation.
+<br>
+Description of Data Processing: The proportions of each form of transportation used to get to work from each state were extracted from the data set and subsequently put through the "pivot_longer" then "pivot_wider" functions to create a column for form of transportation used to get to work and columns for each state. This allowed for the selection of the US region/states of interest followed by the repeated use of the "pivot_longer" function to isolate the proportions used for each form of transportation used to get to work in the 2D heatmap.
+<br><br>
+
+#### US Distribution/Variability of the Proportion of Each Form of Transportation to Work
+```{r, echo = FALSE}
+include_graphics("images/transport_dis.png")
+```
+Subplots were created for each form of transportation studied, allowing for the comparison of the variability of the proportions of each form of transportation used to get to work. From the histogram, it can be seen that proportions of driving, public transportation, and walking varied the most. Additionally, seeing how high the driving proportions are is indicative that greater diversity may come from lower driving proportions. From this, paying attention to the proportions of these specific forms of transportation used to get to work may help when determining the state that uses the most diverse forms of transportation to get to work. In addition, there seems to be not that much variation in the proportions of the forms of transportation used to get to work, meaning a 2D heatmap would be the best way to visualize these minimal differences in proportions; for each state, similar hues/palettes for each form of transportation is indicative of more diversity.
+<br><br>
+
+#### Proportion of Forms of Transportation to Work in the Northeast US
+```{r, echo = FALSE}
+include_graphics("images/transport_NE.png")
+```
+From the graph, it is evident to notice how dark NY's driving box is, meaning that this proportion is much lower than the other bright boxes corresponding to driving in the other states. With this its more similar general color palette, it can be said that NY is the state with the most diverse forms of transportation used to get to work in the Northeast US.
+<br><br>
+
+#### Proportion of Forms of Transportation to Work in the Midwest US
+```{r, echo = FALSE}
+include_graphics("images/transport_MW.png")
+```
+From the graph, it can be seen that IL has a darker driving box than most states, meaning it has a lower proportion and other forms of transportation to work have greater than average proportions. With this its more similar general color palette, it can be said that IL is the state with the most diverse forms of transportation used to get to work in the Midwest US. It is also interesting to note how similar all the Midwestern states are in terms of the forms of transportation utilized to get to work.
+<br><br>
+
+#### Proportion of Forms of Transportation to Work in the South US
+```{r, echo = FALSE}
+include_graphics("images/transport_S.png")
+```
+From the graph, it can be seen that MD has a darker driving box than most states, meaning it has a lower proportion and other forms of transportation to work have greater than average proportions. With this and its more similar general color palette, it can be said that MD is the state with the most diverse forms of transportation used to get to work in the South US. It is also interesting to note how similar all the Southern states are in terms of the forms of transportation to work
+<br><br>
+
+#### Proportion of Forms of Transportation to Work in the West US
+```{r, echo = FALSE}
+include_graphics("images/transport_W.png")
+```
+From the graph, it is evident to notice how dark HI's driving box is, meaning that this proportion is much lower than the other bright boxes corresponding to driving in the other states. With this and its more similar general color palette, it can be said that HI is the state with the most diverse forms of transportation used to get to work in the West US.
+<br><br>
+
+#### Proportion of Forms of Transportation to Work in the Most Transportation-Diverse States of Each US Region
+```{r, echo = FALSE}
+include_graphics("images/transport_US.png")
+```
+From the graph, it is evident to see how dark the driving box is for NY compared to the other states. This and its more similar general color palette is indicative of a lower driving proportion so other forms of transportation like public transportation have greater proportions. With this, NY uses the most diverse forms of transportation to get to work compared to the other US states. 
+<br><br>
+
+
+### Occupation
+Purpose: Using the proportion of individuals employed in sales, STEM, transportation, service, construction, government, private company-related jobs as well as that of self-employed individuals in each US region to identify the state with individuals employed in the most diverse range of occupations.
+<br>
+Description of Data Processing: The proportions of each occupation from each state were extracted from the data set and subsequently put through the "pivot_longer" then "pivot_wider" functions to create a column for occupation and columns for each state. This allowed for the selection of the US region/states of interest followed by the repeated use of the "pivot_longer" function to isolate the proportions used for each occupation in the 2D heatmap.
+<br><br>
+
+#### US Distribution/Variability of Each Occupation's Proportion
+```{r, echo = FALSE}
+include_graphics("images/occupation_dis.png")
+```
+Subplots were created for each occupation studied, allowing for the comparison of the variability of the proportions of each occupation. From the histogram, it can be seen that proportions of private-company, government, transportation, and STEM occupations varied the most. Additionally, seeing how high the private occupation proportion is indicative that lower private occupation proportions indicate more diverse states. From this, paying attention to the proportions of these specific occupations may help when determining the most diverse states in terms of occupations. In addition, there is no notable variation in the proportions of the occupations, meaning a 2D heatmap would be the best way to visualize the minimal differences in proportions; for each state, similar hues/palettes for each occupation is indicative of more diversity.
+<br><br>
+
+#### Proportion of Occupations in the Northeast US
+```{r, echo = FALSE}
+include_graphics("images/occupation_NE.png")
+```
+From the graph, it can be seen that Vermont (VT) has the darkest private occupation box, meaning that it has a lower proportion than average and allowing for other occupations to have greater proportions. Along with its more similar general color palette, this means that VT has the most diverse distribution of occupations in the Northeast US.
+<br><br>
+
+#### Proportion of Occupations in the Midwest US
+```{r, echo = FALSE}
+include_graphics("images/occupation_MW.png")
+```
+From the graph, it can be seen that South Dakota (SD) has the darkest private occupation box, meaning that it has a lower proportion than average and allowing for other occupations to have greater proportions. Along with its more similar general color palette, this means that SD has the most diverse distribution of occupations in the Midwest US.
+<br><br>
+
+#### Proportion of Occupations in the South US
+```{r, echo = FALSE}
+include_graphics("images/occupation_S.png")
+```
+From the graph, it can be seen that MD has the darkest private occupation box, meaning that it has a lower proportion than average and allowing for other occupations to have greater proportions. Along with its more similar general color palette, this means that MD has the most diverse distribution of occupations in the South US.
+<br><br>
+
+#### Proportion of Occupations in the West US
+```{r, echo = FALSE}
+include_graphics("images/occupation_W.png")
+```
+From the graph, it can be seen that AK has the darkest private occupation box, meaning that it has a lower proportion than average and allowing for other occupations to have greater proportions. Along with its more similar general color palette, this means that AK has the most diverse distribution of occupations in the West US. It is also interesting to note how more states in the West have darker private occupation boxes, meaning that the West may contain much more occupational diversity than the other US regions.
+<br><br>
+
+#### Proportion of Occupations in the Most Occupation-Diverse States of Each US Region
+```{r, echo = FALSE}
+include_graphics("images/occupation_US.png")
+```
+From the graph, it can be seen that AK has the darkest private occupation box as well as a color palette most similar to each other compared to the other states. Along with its more similar general color palette, this means that AK has the most diverse distribution of occupations in the US as a whole. However, it is interesting to note how similar the distributions of all these states are.
+<br><br>
+
+
+# Conclusion
+With this data set created, I was able to selectively extract the data of each subcategory and effectively conduct an EDA to study the diversity of the US in terms age, income, race, gender, forms of transportation used to get to work, and occupation. A brief overview of the findings include Maine having the highest median age, Utah having the lowest median age, Maryland having the highest median income, Mississippi having the lowest median income, Hawaii being the most racially diverse, NY having the most diverse form of transportation usage to work, and Arkansas having the most uneven gender balance and most diverse occupations from its population. 
+
+It seemed like most subcategories of this data set had their own majority: White, female, driving, and private-company jobs. In a lot of instances, diversity arose from lower proportions of these majorities, allowing minority subcategories to have greater proportions and thus be more diverse. While not the main purpose of this EDA, it was interesting to see how similar and different the states in each US region were; more often than not, states in the same US region mostly had similar distributions in terms of the variables studied. Collectively, the "tidycensus" function allowed for a deep analysis into our differences in terms of diversity at the national, regional, and state-level.
+
